@@ -1,0 +1,13 @@
+on:
+  workflow_call:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify source branch is dev
+        run: |
+          if [ "${{ github.head_ref }}" != "dev" ]; then
+            echo "Only PRs from dev are allowed into main"
+            exit 1
+          fi
